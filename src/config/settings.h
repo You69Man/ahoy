@@ -173,6 +173,7 @@ typedef struct {
     //uint16_t wakeUp;
     //uint16_t sleepAt;
     uint8_t contrast;
+    uint8_t disp_hw_spi;
     uint8_t disp_data;
     uint8_t disp_clk;
     uint8_t disp_cs;
@@ -469,6 +470,7 @@ class settings {
             mCfg.plugin.display.screenSaver = 1;  // default: 1 .. pixelshift for OLED for downward compatibility
             mCfg.plugin.display.graph_ratio = 0;
             mCfg.plugin.display.graph_size  = 2;
+            mCfg.plugin.display.disp_hw_spi = false;  // use HW-SPI instead of SW-SPI
             mCfg.plugin.display.rot = 0;
             mCfg.plugin.display.disp_data  = DEF_PIN_OFF; // SDA
             mCfg.plugin.display.disp_clk   = DEF_PIN_OFF; // SCL
@@ -714,6 +716,7 @@ class settings {
                 //disp[F("wake")] = mCfg.plugin.display.wakeUp;
                 //disp[F("sleep")] = mCfg.plugin.display.sleepAt;
                 disp[F("contrast")] = mCfg.plugin.display.contrast;
+                disp[F("hwSpi")] = mCfg.plugin.display.disp_hw_spi;
                 disp[F("data")] = mCfg.plugin.display.disp_data;
                 disp[F("clock")] = mCfg.plugin.display.disp_clk;
                 disp[F("cs")] = mCfg.plugin.display.disp_cs;
@@ -734,6 +737,7 @@ class settings {
                 //mCfg.plugin.display.wakeUp = disp[F("wake")];
                 //mCfg.plugin.display.sleepAt = disp[F("sleep")];
                 getVal<uint8_t>(disp, F("contrast"), &mCfg.plugin.display.contrast);
+                getVal<uint8_t>(disp, F("hwSpi"), &mCfg.plugin.display.disp_hw_spi);
                 getVal<uint8_t>(disp, F("data"), &mCfg.plugin.display.disp_data);
                 getVal<uint8_t>(disp, F("clock"), &mCfg.plugin.display.disp_clk);
                 getVal<uint8_t>(disp, F("cs"), &mCfg.plugin.display.disp_cs);
