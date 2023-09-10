@@ -305,6 +305,10 @@
                                 <div class="col-12 col-sm-9"><input type="number" name="disp_cont" min="0" max="255"></select></div>
                             </div>
                             <p class="des">{#DISP_PINOUT}</p>
+                            <div class="row mb-3" id="option_hw_spi">
+                                <div class="col-8 col-sm-3">Use HW-SPI</div>
+                                <div class="col-4 col-sm-9"><input type="checkbox" id="id_hw_spi" name="disp_hw_spi"/></div>
+                            </div>
                             <div id="dispPins"></div>
                             <div id="pirPin"></div>
                             <div id="graphOptions">
@@ -1035,7 +1039,7 @@
                 else if("ESP32-C3" == system["chip_model"]) pinList = esp32c3pins;
                 /*ENDIF_ESP32*/
 
-                for(var i of ["disp_pwr"])
+                for(var i of ["disp_pwr", "disp_hw_spi"])
                     document.getElementsByName(i)[0].checked = obj[i];
 
                 var dpins_elem = document.getElementById("dispPins");
@@ -1105,6 +1109,10 @@
 
                 document.getElementsByName("disp_cont")[0].value = obj["disp_cont"];
 
+                document.getElementById("id_hw_spi").addEventListener('change', function() {
+                    hideDispPins(pins, parseInt(dtype_sel.value))
+                });
+
                 dtype_sel.addEventListener('change', function(e) {
                     hideDispPins(pins, parseInt(e.target.value))
                 });
@@ -1141,9 +1149,22 @@
                     [6,  [1,1,0,0,0,0]], //SSD1309_128x64
                     [10, [1,1,1,1,1,1]]  //ePaper
                 ])
+
+                var useHwSpi = document.getElementById("id_hw_spi").checked;
+                if (3==dispType) {  // show option only for Nokia5110 resp. PCD8544
+                    setHide("option_hw_spi", false);
+                }
+                else {              // no HW_SPI option for all others
+                    setHide("option_hw_spi", true);
+                    useHwSpi = false;
+                }
+
                 for(var i = 0; i < pins.length; i++) {
                     var cl = document.getElementById("row_" + pins[i][1]).classList;
-                    if(pinMap.get(dispType)[i]) {
+                    var show = pinMap.get(dispType)[i];
+                    if (i<2 && useHwSpi) // show clock and data only if SW_SPI is used
+                        show = false;
+                    if(show) {
                         cl.remove("hide");
                     }
                     else {
