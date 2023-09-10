@@ -18,8 +18,11 @@ class DisplayMono84X48 : public DisplayMono {
 
         void init(DisplayData *displayData) override {
             u8g2_cb_t *rot = (u8g2_cb_t *)((mCfg->rot != 0x00) ? U8G2_R2 : U8G2_R0);
+            if (mCfg->disp_hw_spi)
+                monoInit(new U8G2_PCD8544_84X48_F_4W_HW_SPI(rot, mCfg->disp_cs, mCfg->disp_dc, 0xff), displayData);
+            else
+	            monoInit(new U8G2_PCD8544_84X48_F_4W_SW_SPI(rot, mCfg->disp_clk, mCfg->disp_data, mCfg->disp_cs, mCfg->disp_dc, 0xff), displayData);
 
-            monoInit(new U8G2_PCD8544_84X48_F_4W_SW_SPI(rot, mCfg->disp_clk, mCfg->disp_data, mCfg->disp_cs, mCfg->disp_dc, 0xff), displayData);
             calcLinePositions();
 
             switch(mCfg->graph_size) { // var opts2 = [[0, "Line 1 - 2"], [1, "Line 2 - 3"], [2, "Line 1 - 3"], [3, "Line 2 - 4"], [4, "Line 1 - 4"]];

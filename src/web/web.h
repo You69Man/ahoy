@@ -560,6 +560,7 @@ class Web {
             mConfig->plugin.display.type        = request->arg("disp_typ").toInt();
             mConfig->plugin.display.contrast    = (mConfig->plugin.display.type  == DISP_TYPE_T0_NONE) ||   // contrast available only according optionsMap in setup.html, otherwise default value
                                                   (mConfig->plugin.display.type  == DISP_TYPE_T10_EPAPER) ? 140 : request->arg("disp_cont").toInt();
+            mConfig->plugin.display.disp_hw_spi = (request->arg("disp_hw_spi") == "on");
             mConfig->plugin.display.screenSaver = ((mConfig->plugin.display.type == DISP_TYPE_T1_SSD1306_128X64) // screensaver available only according optionsMap in setup.html, otherwise default value
                                                 || (mConfig->plugin.display.type == DISP_TYPE_T2_SH1106_128X64)
                                                 || (mConfig->plugin.display.type == DISP_TYPE_T4_SSD1306_128X32)

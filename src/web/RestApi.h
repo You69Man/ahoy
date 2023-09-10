@@ -703,6 +703,7 @@ class RestApi {
             obj[F("disp_cont")]         = (uint8_t)mConfig->plugin.display.contrast;
             obj[F("disp_graph_ratio")]  = (uint8_t)mConfig->plugin.display.graph_ratio;
             obj[F("disp_graph_size")]   = (uint8_t)mConfig->plugin.display.graph_size;
+            obj[F("disp_hw_spi")]       = (bool)mConfig->plugin.display.disp_hw_spi;
             obj[F("disp_clk")]          = mConfig->plugin.display.disp_clk;
             obj[F("disp_data")]         = mConfig->plugin.display.disp_data;
             obj[F("disp_cs")]           = mConfig->plugin.display.disp_cs;
