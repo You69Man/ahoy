@@ -27,6 +27,51 @@ This repository provides hardware and software solutions for communicating with 
 [Development Version](https://github.com/lumapu/ahoy/blob/development03/src/CHANGES.md)
 
 
+--- Fork information ---
+
+This fork aims to improve the display layouts of several low-res displays
+
+Current status of progress Nokia5110:
+- Nokia5110: improved layout with additional fixed headline for day of week, date and time, and centered text (already merged in lumapu >=0.7.34)
+- improved 5x8 pixel font (some glyphes like dot and zero were deformed) and enhanced by ahoy specific symbols (already merged in lumapu >=0.7.50)
+- added sun and moon symbols with values that show number of producing and sleeping inverters (already merged in lumapu >=0.7.50)
+- added calender and sigma symbols for YieldDay and YieldTotal (already merged in lumapu >=0.7.50)
+- added symbol for WiFi and MQTT that indicates WiFi and MQTT connection status (already merged in lumapu >=0.7.50)
+- added RSSI bar for WiFi (already merged in lumapu >=0.7.50)
+- added symbol für NRF24 that indicates if radio board is connected (already merged in lumapu >=0.7.50)
+- added RSSI bar for NRF24 (currently fed by quality information from the transition package heuristics to 'fake' radio RSSI)
+
+![alt text](https://github.com/You69Man/ahoy/blob/feature/display_84x48_symbolic_PR/pics/PXL_20230824_204200660.jpg?raw=true)
+
+
+Current status of progress OLEDs 128x64:
+There is also already a working implementation for OLED 128x64, with a bit of a higher font and symbol resolution.
+OLEDs however tend to quickly burn-in for which reason a screensaver is a must.
+
+The currently implemented screensaver vor OLEDs is based on shifting pixels. The drawback of this kind of screensaver is, that not the whole screen can be used for the layout (or some of the pixels would "fall off" the screen).
+So, moving the whole screen content is no good option for a layout that is very well optimized. 
+
+Using the pixel shift screensaver reduced the new layout to following new features:
+- layout with additional fixed headline for day of week, date and time, and centered text
+- sun and moon symbols with values that show number of producing and sleeping inverters
+- calender and sigma symbols for YieldDay and YieldTotal
+
+
+--- New Motion Screensaver ---
+
+There is a new option for new screensaver based on a motion detection sensor (PIR sensor). 
+This requires a free GPIO pin and a PIR sensor.
+When moving in front of the Ahoy, the display goes on automatically. After one minute without movement the display goes off again, to protect it against burn in.
+
+Activating this option also adds the following features for the 128x64 pixel OLEDs:
+- symbol for WiFi and MQTT that indicates WiFi and MQTT connection status
+- RSSI bar for WiFi
+- symbol für NRF24 that indicates if radio board is connected
+- RSSI bar for NRF24 (currently fed by quality information from the transition package heuristics to 'fake' radio RSSI))
+
+![alt text](https://github.com/You69Man/ahoy/blob/feature/display_84x48_symbolic_PR/pics/PXL_20230901_061927908.jpg?raw=true)
+
+
 Table of approaches:
 
 | Board  | MI | HM | HMS/HMT | comment | HowTo start |
