@@ -41,6 +41,17 @@ class CommQueue {
             return N;
         }
 
+        void print_current_queue_s(void) {
+            DBGPRINTLN("mRdPtr=" + String(mRdPtr));
+            DBGPRINTLN("mWrPtr=" + String(mWrPtr));
+            DBGPRINTLN("cmd = " + String(mQueue[mRdPtr].cmd));
+            DBGPRINTLN("attempts = " + String(mQueue[mRdPtr].attempts));
+            DBGPRINTLN("attemptsMax = " + String(mQueue[mRdPtr].attemptsMax));
+            DBGPRINTLN("ts = " + String(mQueue[mRdPtr].ts));
+            DBGPRINTLN("isDevControl = " + String(mQueue[mRdPtr].isDevControl));
+/*          Inverter<> *iv  */
+        }
+
     protected:
         struct queue_s {
             Inverter<> *iv;

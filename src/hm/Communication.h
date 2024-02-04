@@ -76,6 +76,8 @@ class Communication : public CommQueue<> {
                         mLocalBuf[i].len = 0;
                     }
 
+                    print_current_queue_s();
+                    
                     if(*mSerialDebug)
                         mHeu.printStatus(q->iv);
                     mHeu.getTxCh(q->iv);
