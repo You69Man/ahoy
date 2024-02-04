@@ -499,6 +499,8 @@ class Communication : public CommQueue<> {
         }
 
         inline void compilePayload(const queue_s *q) {
+            static int test = 0;
+
             uint16_t crc = 0xffff, crcRcv = 0x0000;
             for(uint8_t i = 0; i < mMaxFrameId; i++) {
                 if(i == (mMaxFrameId - 1)) {
@@ -556,6 +558,8 @@ class Communication : public CommQueue<> {
             }
 
             record_t<> *rec = q->iv->getRecordStruct(q->cmd);
+/*            if (test++ == 10)
+                rec = NULL;*/
             if(NULL == rec) {
                 if(GetLossRate == q->cmd) {
                     q->iv->parseGetLossRate(mPayload, len);
@@ -566,6 +570,10 @@ class Communication : public CommQueue<> {
                 }
                 return;
             }
+
+            if (test++ == 10)
+                len++;
+
             if((rec->pyldLen != len) && (0 != rec->pyldLen)) {
                 if(*mSerialDebug) {
                     DPRINT(DBG_ERROR, F("plausibility check failed, expected "));

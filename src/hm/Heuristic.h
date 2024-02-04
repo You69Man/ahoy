@@ -133,6 +133,11 @@ class Heuristic {
         }
 
         void printStatus(Inverter<> *iv) {
+            DBGPRINT("*** printStatus ***");
+            if (iv == nullptr) {
+                DBGPRINT("Null-Pointer!!!");
+                return;
+            }
             DPRINT_IVID(DBG_INFO, iv->id);
             DBGPRINT(F("Radio infos:"));
             if((IV_HMS != iv->ivGen) && (IV_HMT != iv->ivGen)) {
