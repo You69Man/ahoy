@@ -109,6 +109,17 @@ class Display {
             #endif
         }
 
+        bool getDisplayActive(void) {
+            if (mMono)
+                return mMono->getDisplayActive();
+            else
+                return false;
+        }
+
+        bool getMotionSensorActive(void) {
+            return (motionSensorActive());
+        }
+
     private:
         void DataScreen() {
             if (DISP_TYPE_T0_NONE == mCfg->type)

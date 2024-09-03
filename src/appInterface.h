@@ -75,6 +75,10 @@ class IApp {
         virtual uint32_t getHistoryPeriod(uint8_t type) = 0;
         virtual uint16_t getHistoryMaxDay() = 0;
         virtual uint32_t getHistoryLastValueTs(uint8_t type) = 0;
+
+        virtual bool getDisplayActive(void) = 0;
+        virtual bool getMotionSensorActive(void) = 0;
+
         #if defined(ENABLE_HISTORY_LOAD_DATA)
         virtual void addValueToHistory(uint8_t historyType, uint8_t valueType, uint32_t value) = 0;
         #endif

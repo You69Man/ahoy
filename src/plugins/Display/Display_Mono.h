@@ -61,6 +61,10 @@ class DisplayMono {
             return(monoMaintainDispSwitchState());  // return flag, if display content should be updated immediately
         }
 
+        virtual bool getDisplayActive(void) {
+            return(mDisplayActive);
+        }
+
     protected:
         enum class DispSwitchState {
             TEXT,

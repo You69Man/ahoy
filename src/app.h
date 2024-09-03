@@ -388,6 +388,14 @@ class app : public IApp, public ah::Scheduler {
         }
         #endif
 
+        bool getDisplayActive(void) override {
+            return mDisplay.getDisplayActive();
+        }
+
+        bool getMotionSensorActive(void) override {
+            return mDisplay.getMotionSensorActive();
+        }
+
     private:
         #define CHECK_AVAIL     true
         #define SKIP_YIELD_DAY  true

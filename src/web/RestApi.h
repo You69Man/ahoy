@@ -399,6 +399,8 @@ class RestApi {
             obj[F("cst_lnk_txt")] = String(mConfig->plugin.customLinkText);
             obj[F("region")]      = mConfig->sys.region;
             obj[F("timezone")]    = mConfig->sys.timezone;
+            obj[F("display_active")] = mApp->getDisplayActive();
+            obj[F("motion_sensor_active")] = mApp->getMotionSensorActive();
 
         #if defined(ESP32)
             obj[F("esp_type")]    = F("ESP32");
