@@ -991,7 +991,6 @@ class RestApi {
         }
 
         void getSetup(AsyncWebServerRequest *request, JsonObject obj) {
-            getGeneric(request, obj.createNestedObject(F("generic")));
             getSysInfo(request, obj.createNestedObject(F("system")));
             //getInverterList(obj.createNestedObject(F("inverter")));
             getMqtt(obj.createNestedObject(F("mqtt")));

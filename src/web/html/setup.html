@@ -1341,7 +1341,7 @@
 
             function parse(root) {
                 if(null != root) {
-                    parseGeneric(root.generic);
+                    parseGeneric(root.system.generic);
                     parseSys(root.system);
                     parseStaticIp(root.static_ip);
                     parseMqtt(root.mqtt);
