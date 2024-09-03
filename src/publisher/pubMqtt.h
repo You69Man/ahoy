@@ -153,6 +153,26 @@ class PubMqtt {
                 }
             }
 
+            // publish new display status on change of status
+            bool da = mApp->getDisplayActive();
+            if (da && !mLastDisplayActive) {
+                publish(subtopics[MQTT_DISP_ACTIVE], dict[STR_TRUE], true);
+            }
+            else if (!da && mLastDisplayActive) {
+                publish(subtopics[MQTT_DISP_ACTIVE], dict[STR_FALSE], true);
+            }
+            mLastDisplayActive = da;
+
+            // publish new motion status on change of status
+            bool ma = mApp->getMotionSensorActive();
+            if (ma && !mLastMotionsSensorActive) {
+                publish(subtopics[MQTT_MOTION_SENSOR_ACTIVE], dict[STR_TRUE], true);
+            }
+            else if (!ma && mLastMotionsSensorActive) {
+                publish(subtopics[MQTT_MOTION_SENSOR_ACTIVE], dict[STR_FALSE], true);
+            }
+            mLastMotionsSensorActive = ma;
+
             sendAlarmData();
         }
 
@@ -760,6 +780,8 @@ class PubMqtt {
         std::array<InverterStatus, MAX_NUM_INVERTERS> mLastIvState;
         std::array<uint32_t, MAX_NUM_INVERTERS> mIvLastRTRpub;
         uint16_t mIntervalTimeout = 0;
+        bool mLastDisplayActive = false;
+        bool mLastMotionsSensorActive = false;
 
         std::queue<message_s> mReceiveQueue;
 
